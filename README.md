@@ -22,6 +22,7 @@ From the root directory (logDemo), run the following commands:
 java -jar build/libs/logDemo-0.0.1-SNAPSHOT.jar log.txt
 
 ```
+The results are written into 'EVENTS' table. 'RAW_EVENTS' table stores the orignal events.
 
 ### Running the tests
 ```
