@@ -6,7 +6,6 @@ import com.test.logDemo.dao.model.RawEvent;
 import com.test.logDemo.dao.model.RawEventBuilder;
 import com.test.logDemo.dao.model.RawEventId;
 import com.test.logDemo.dto.RawEventDto;
-import com.test.logDemo.dto.RawEventDtoBuilder;
 
 @Component
 public class RawEventMapper {

@@ -1,11 +1,12 @@
 package com.test.logDemo.service;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -20,15 +21,18 @@ import com.test.logDemo.util.State;
 @Service
 public class EventServiceImpl implements EventService {
     private static final int DURATION_THRESHOLD = 4;
+    private static final int TIMEOUT = 800;
     private static Logger LOG = LoggerFactory.getLogger(EventServiceImpl.class);
     private final RawEventRepository rawEventRepository;
     private final EventRepository eventRepository;
     private final DataService dataService;
+    private final ExecutorService executorService;
 
-    public EventServiceImpl(RawEventRepository rawEventRepository, EventRepository eventRepository, DataService dataService) {
+    public EventServiceImpl(RawEventRepository rawEventRepository, EventRepository eventRepository, DataService dataService, ExecutorService executorService) {
         this.rawEventRepository = rawEventRepository;
         this.eventRepository = eventRepository;
         this.dataService = dataService;
+        this.executorService = executorService;
     }
 
     @Override
@@ -42,7 +46,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public void addAlertFlagsToSlice(List<RawEventDto> finished, List<RawEventDto> started) {
         if (finished.size() != started.size()) {
-            LOG.error("started and finished event logs are not equal, skip");
+            LOG.error("started and finished event logs are not in sync, amount not equal, skip");
         } else {
             for (int i = 0; i < finished.size(); i++) {
                 RawEventDto finishedEventDto = finished.get(i);
@@ -61,20 +65,34 @@ public class EventServiceImpl implements EventService {
     public void addAlertFlagsToAll(int sliceSize) {
 
         Pageable slice = dataService.getSliceSortedById(0, sliceSize);
-        List<RawEventDto> finished = prepareRawEventsByState(slice, State.FINISHED);
-        List<RawEventDto> started = prepareRawEventsByState(slice, State.STARTED);
-        addAlertFlagsToSlice(finished, started);
+        List<RawEventDto> finishedRawEvents = prepareRawEventsByState(slice, State.FINISHED);
+        List<RawEventDto> startedRawEvents = prepareRawEventsByState(slice, State.STARTED);
+        addAlertFlagsToSlice(finishedRawEvents, startedRawEvents);
 
 
         Pageable nextSlice = slice.next();
 
-        for(int i = 0; i< rawEventRepository.count() - sliceSize; i++){
-            finished = prepareRawEventsByState(nextSlice, State.FINISHED);
-            started = prepareRawEventsByState(nextSlice, State.STARTED);
-            addAlertFlagsToSlice(finished, started);
-
+        for(int i = 0; i < rawEventRepository.count() - sliceSize; i++){
+            executorService.execute(task(nextSlice));
             nextSlice = nextSlice.next();
         }
+
+        executorService.shutdown();
+        try {
+            if (!executorService.awaitTermination(TIMEOUT, TimeUnit.MILLISECONDS)) {
+                executorService.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            executorService.shutdownNow();
+        }
+    }
+
+    private Runnable task(Pageable nextSlice){
+         return () -> {
+             List<RawEventDto> finishedRawEvents = prepareRawEventsByState(nextSlice, State.FINISHED);
+             List<RawEventDto> startedRawEvents = prepareRawEventsByState(nextSlice, State.STARTED);
+             addAlertFlagsToSlice(finishedRawEvents, startedRawEvents);
+         };
     }
 
     private Event createEvent(RawEventDto finishedEventDto, RawEventDto startedEventDto) {

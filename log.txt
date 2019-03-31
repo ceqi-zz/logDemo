@@ -1,0 +1,30 @@
+{"id":"scsmbstgra", "state":"STARTED", "type":"APPLICATION_LOG", "host":"12345", "timestamp":1491377495212} 
+{"id":"scsmbstgrb", "state":"STARTED", "timestamp":1491377495213} 
+{"id":"scsmbstgrc", "state":"FINISHED", "timestamp":1491377495218} 
+{"id":"scsmbstgra", "state":"FINISHED", "type":"APPLICATION_LOG", "host":"12345", "timestamp":1491377495217} 
+{"id":"scsmbstgrc", "state":"STARTED", "timestamp":1491377495210} 
+{"id":"scsmbstgrb", "state":"FINISHED", "timestamp":1491377495216}
+{"id":"scsmbstgrd", "state":"FINISHED", "timestamp":1491377495217}
+{"id":"scsmbstgre", "state":"FINISHED", "timestamp":1491377495217}
+{"id":"scsmbstgrf", "state":"FINISHED", "timestamp":1491377495216}
+{"id":"scsmbstgrg", "state":"FINISHED", "timestamp":1491377495216}
+{"id":"scsmbstgrh", "state":"FINISHED", "timestamp":1491377495216}
+{"id":"scsmbstgri", "state":"FINISHED", "timestamp":1491377495216}
+{"id":"scsmbstgrj", "state":"FINISHED", "timestamp":1491377495216}
+{"id":"scsmbstgrk", "state":"FINISHED", "timestamp":1491377495216}
+{"id":"scsmbstgrl", "state":"FINISHED", "timestamp":1491377495216}
+{"id":"scsmbstgrm", "state":"FINISHED", "timestamp":1491377495216}
+{"id":"scsmbstgrn", "state":"FINISHED", "timestamp":1491377495216}
+{"id":"scsmbstgro", "state":"FINISHED", "timestamp":1491377495216}
+{"id":"scsmbstgrd", "state":"STARTED", "timestamp":1491377495210}
+{"id":"scsmbstgre", "state":"STARTED", "timestamp":1491377495210}
+{"id":"scsmbstgri", "state":"STARTED", "timestamp":1491377495210}
+{"id":"scsmbstgrj", "state":"STARTED", "timestamp":1491377495210}
+{"id":"scsmbstgrk", "state":"STARTED", "timestamp":1491377495210}
+{"id":"scsmbstgrl", "state":"STARTED", "timestamp":1491377495210}
+{"id":"scsmbstgrm", "state":"STARTED", "timestamp":1491377495210}
+{"id":"scsmbstgrn", "state":"STARTED", "timestamp":1491377495210}
+{"id":"scsmbstgro", "state":"STARTED", "timestamp":1491377495210}
+{"id":"scsmbstgrf", "state":"STARTED", "timestamp":1491377495210}
+{"id":"scsmbstgrg", "state":"STARTED", "timestamp":1491377495210}
+{"id":"scsmbstgrh", "state":"STARTED", "timestamp":1491377495210}
