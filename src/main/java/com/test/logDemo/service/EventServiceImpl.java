@@ -53,9 +53,10 @@ public class EventServiceImpl implements EventService {
                 RawEventDto startedEventDto = started.get(i);
 
                 Event event = createEvent(finishedEventDto, startedEventDto);
-
+                LOG.info("Loading event to DB: " + event.getId() + "with alert?" + event.getAlert() + ", with " +
+                        "duration: " + event.getDuration());
                 eventRepository.save(event);
-
+                LOG.info("Loaded event to DB: " + event.getId());
             }
         }
 

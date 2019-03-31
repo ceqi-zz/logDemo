@@ -19,7 +19,7 @@ public class LogDemoApplication implements CommandLineRunner {
 	@Autowired
 	private EventService eventService;
 
-	private static final int SLICE_SIZE = 1000;  // read 1000 rows per calculation
+	private static final int SLICE_SIZE = 10000;
 
 	public static void main(String[] args) {
 		SpringApplication.run(LogDemoApplication.class, args);

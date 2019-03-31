@@ -43,7 +43,9 @@ public class DataServiceImpl implements DataService {
                 try {
                     RawEventDto rawEventDto = objectMapper.readValue(event, RawEventDto.class);
                     RawEvent rawEvent = RawEventMapper.dtoToRawEventMapper(rawEventDto);
+                    LOG.info("Loading raw event to DB: " + rawEvent.getId().toString());
                     rawEventRepository.save(rawEvent);
+                    LOG.info("Loaded raw event to DB: " + rawEvent.getId().toString());
                 } catch (IOException e) {
                     LOG.error("Error reading event string: Unmarshalling error");
                 }

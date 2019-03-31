@@ -1,6 +1,5 @@
 package com.test.logDemo.service;
 
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +20,7 @@ import com.test.logDemo.dao.repository.RawEventRepository;
 import com.test.logDemo.dto.RawEventDto;
 import com.test.logDemo.util.State;
 
+import static junit.framework.TestCase.fail;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class EventServiceImplTest {
     private DataService dataService;
 
     @Before
-    public void setUp()  {
+    public void setUp() {
         rawEventRepository.save(new RawEventBuilder().setId(new RawEventId("scsmbstgra", "STARTED")).setType("APPLICATION_LOG").setHost("12345").setTimestamp(1491377495212L).createRawEvent());
         rawEventRepository.save(new RawEventBuilder().setId(new RawEventId("scsmbstgrb", "STARTED")).setType(null).setHost(null).setTimestamp(1491377495213L).createRawEvent());
         rawEventRepository.save(new RawEventBuilder().setId(new RawEventId("scsmbstgrc", "FINISHED")).setType(null).setHost(null).setTimestamp(1491377495218L).createRawEvent());
@@ -49,9 +49,8 @@ public class EventServiceImplTest {
         rawEventRepository.save(new RawEventBuilder().setId(new RawEventId("scsmbstgrb", "FINISHED")).setType(null).setHost(null).setTimestamp(1491377495216L).createRawEvent());
     }
 
-
     @After
-    public void tearDown()  {
+    public void tearDown() {
         rawEventRepository.deleteAll();
     }
 
@@ -63,12 +62,12 @@ public class EventServiceImplTest {
         List<RawEventDto> started = eventService.prepareRawEventsByState(slice, State.STARTED);
         eventService.addAlertFlagsToSlice(finished, started);
 
-        assertThat(eventRepository.findById("scsmbstgrc").get().getAlert()).isEqualTo(true);
+        assertThat(eventRepository.findById("scsmbstgra").get().getAlert()).isEqualTo(true);
 
     }
 
     @Test
-    public void addAlertFlagsToAll_thenAllEventsAreAdded(){
+    public void addAlertFlagsToAll_thenAllEventsAreAdded() {
         eventService.addAlertFlagsToAll(2);
         assertThat(eventRepository.count()).isEqualTo(3);
     }
