@@ -2,9 +2,12 @@
 
 Add a alert flag to long-running events.
 
+Load file using Java NIO Files.lines(), reading events line by line sequentially is considered sufficient as it toke 
+about 3.5 
+seconds to read in a 1GB file.
 
-If the log file to read is large (gigabytes), then the events will be partitioned to slices, each slice will be 
-handled by a thread, thus improve the efficiency.
+If the log file to read is large (gigabytes), after being loaded into db, the events will be read by slices, 
+multiple slices are handled by threads, the processing is done in parallel, thus improving the efficiency.
 
 By default the slice size is 10000 events.   
 

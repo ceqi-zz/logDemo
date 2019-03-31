@@ -28,3 +28,8 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+
+testdb.log
+testdb.script
+testdb.properties
+testdb.tmp
