@@ -37,7 +37,7 @@ public class DataServiceImpl implements DataService {
 
     @Override
     public void loadFromFile(String filePath) {
-        LOG.info("loading from file:" + filePath);
+        LOG.info("Loading from file:" + filePath);
         try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
             stream.forEach(event -> {
                 try {
