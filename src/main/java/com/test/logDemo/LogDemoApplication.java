@@ -34,7 +34,7 @@ public class LogDemoApplication implements CommandLineRunner {
 		LOG.info("File loaded to hsqldb");
 		LOG.info("Process events, add alert");
 		eventService.addAlertFlagsToAll(SLICE_SIZE);
-		LOG.info("Log demo FINISHED");
+		LOG.info("FINISHED: log demo");
 
 
 	}
