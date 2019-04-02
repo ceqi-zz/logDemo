@@ -1,4 +1,7 @@
+[![Build Status](https://travis-ci.com/ceqi/logDemo.svg?branch=master)](https://travis-ci.com/ceqi/logDemo)
+
 # logDemo
+
 
 Add a alert flag to long-running events.
 
