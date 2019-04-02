@@ -17,7 +17,7 @@ From the root directory (logDemo), run the following commands:
 ### Run
 
 ```
-./gradlew build
+./gradlew assemble
 
 java -jar build/libs/logDemo-0.0.1-SNAPSHOT.jar log.txt
 
@@ -25,7 +25,7 @@ java -jar build/libs/logDemo-0.0.1-SNAPSHOT.jar log.txt
 
 ### Running the tests
 ```
-./gradlew test
+./gradlew check
 ```
 
 ### Test Report
