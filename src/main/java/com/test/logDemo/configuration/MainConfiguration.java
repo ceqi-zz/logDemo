@@ -10,12 +10,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 public class MainConfiguration  {
-    private static final int NThREADS = 4;
+    private static final int NTHREADS = 4;
     @Bean
     public ObjectMapper objectMapper(){
         return new ObjectMapper();
     }
 
     @Bean
-    public ExecutorService executorService(){return Executors.newFixedThreadPool(NThREADS);}
+    public ExecutorService executorService(){return Executors.newFixedThreadPool(NTHREADS);}
 }

@@ -6,7 +6,7 @@ Load file using Java NIO Files.lines(), reading events line by line sequentially
 about 3.5 
 seconds to read in a 1GB file.
 
-If the log file to read is large (gigabytes), after being loaded into db, the events will be read by slices, 
+If the log file to read is large (gigabytes), after being loaded into db, the events will be read from db by slices, 
 multiple slices are handled by threads, the processing is done in parallel, thus improving the efficiency.
 
 By default the slice size is 10000 events.   
@@ -22,6 +22,7 @@ From the root directory (logDemo), run the following commands:
 java -jar build/libs/logDemo-0.0.1-SNAPSHOT.jar log.txt
 
 ```
+The results are written into 'EVENTS' table. 'RAW_EVENTS' table stores the orignal events.
 
 ### Running the tests
 ```
